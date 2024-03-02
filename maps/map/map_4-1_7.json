@@ -1,0 +1,23 @@
+{
+  "name": "筑梦边境-7",
+  "author": "Klamist",
+  "start": [
+    {"map": ""},
+    {"map_4-1_point_5.png": 1.5},
+    {"transfer": 1.5}
+  ],
+  "map": [
+    {
+      "w": 4.2
+    },
+    {
+      "fighting": 1
+    },
+    {
+      "w": 0.4
+    },
+    {
+      "fighting": 1
+    }
+  ]
+}

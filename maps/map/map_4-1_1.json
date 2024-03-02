@@ -1,0 +1,17 @@
+{
+  "name": "筑梦边境-1",
+  "author": "Klamist",
+  "start": [
+    {"map": ""},
+    {"map_4-1_point_1.png": 1.5},
+    {"transfer": 1.5}
+  ],
+  "map": [
+    {
+      "d": 4.6425862312316895
+    },
+    {
+      "fighting": 1
+    }
+  ]
+}

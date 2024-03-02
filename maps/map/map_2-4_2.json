@@ -1,0 +1,26 @@
+{
+  "name": "永冬岭-2",
+  "author": "Klamist",
+  "start": [
+    {"map": ""},
+    {"map_2-4_point_3.png": 1.5},
+    {"transfer": 1.5}
+  ],
+  "map": [
+    {
+      "s": 1.0
+    },
+    {
+      "a": 6.9
+    },
+    {
+      "fighting": 1
+    },
+    {
+      "w": 2.5
+    },
+    {
+      "fighting": 1
+    }
+  ]
+}
