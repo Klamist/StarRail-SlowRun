@@ -1,6 +1,8 @@
 # StarRail-SlowRun
 不疾跑的自用版，仅调整了锄大地相关内容。
 没有交流群。可issue提bug等问题。
+所有程序框架来自[Souloco的FastRun](https://github.com/Souloco/StarRail-FastRun)
+部分地图路线来自[Starry-Wind的StarRailAssistant](https://github.com/Starry-Wind/StarRailAssistant)
 
 # 比FastRun修改的部分：
 - E键交互，F是秘技
