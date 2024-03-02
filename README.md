@@ -1,15 +1,15 @@
 # StarRail-SlowRun
-不疾跑的自用版，仅调整了锄大地相关内容。
-没有交流群。可issue提bug等问题。
-所有程序框架来自[Souloco的FastRun](https://github.com/Souloco/StarRail-FastRun)
-部分地图路线来自[Starry-Wind的StarRailAssistant](https://github.com/Starry-Wind/StarRailAssistant)
+不疾跑的自用版，仅调整了锄大地相关内容  
+没有交流群。可issue提bug等问题  
+所有程序框架来自[Souloco的FastRun](https://github.com/Souloco/StarRail-FastRun)  
+部分地图路线来自[Starry-Wind的StarRailAssistant](https://github.com/Starry-Wind/StarRailAssistant)  
 
 # 比FastRun修改的部分：
+- 去掉了shift疾跑功能，疾跑在转弯转向时有太多不可控情况
 - E键交互，F是秘技
     - 若要换回F交互E秘技，修改utils/calculated.py里__init__变量
 - map_json的start部分新增map_move
     - 找传送点前向指定方向拖地图。如w2下滑2次(朝上找)。
-- 去掉了shift疾跑功能。map路线基于崩铁1.1版本的HSA项目一路魔改至今
 - 缩减了很多sleep时间
 - 优化了wait_main_interaction，但交互完已识别可操作后，未知原因偶尔依然等待~3秒
 - 转向识别角度的arrow.jpg换为png，对超180度旋转会往反方向转360-n
