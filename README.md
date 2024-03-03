@@ -4,22 +4,22 @@
 所有程序框架来自[Souloco的FastRun](https://github.com/Souloco/StarRail-FastRun)  
 部分地图路线来自[Starry-Wind的StarRailAssistant](https://github.com/Starry-Wind/StarRailAssistant)  
 
-# 比FastRun修改的部分：
-- 去掉了shift疾跑功能，疾跑在转弯转向时有太多不可控情况
+# SlowRun相比FastRun的改动：
+- 去掉了shift疾跑，使用慢跑路线
 - E键交互，F是秘技
     - 若要换回F交互E秘技，修改utils/calculated.py里__init__变量
-- map_json的start部分新增map_move
-    - 找传送点前向指定方向拖地图。如w2下滑2次(朝上找)。
-- 缩减了很多sleep时间
-- 优化了wait_main_interaction，但交互完已识别可操作后，未知原因偶尔依然等待~3秒
+- map_json的start新增map_move功能
+    - 传送点识图前向指定方向拖地图。如w2是朝上找，下滑2次。
+- 缩减了很多sleep与图片匹配的overtime
 - 转向识别角度的arrow.jpg换为png，对超180度旋转会往反方向转360-n
-
+- 保存角色的经验值截图：开始、进入新星球、结束时
 
 MiHoYo已声明:
 ```
 "严禁使用外挂、加速器、脚本或其他破坏游戏公平性的第三方工具。"
 "一经发现，米哈游（下亦称“我们”）将视违规严重程度及违规次数，采取扣除违规收益、冻结游戏账号、永久封禁游戏账号等措施。"
 ```
+
 # 使用说明
 - 环境配置
     - python安装

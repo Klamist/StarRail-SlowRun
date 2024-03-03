@@ -1,13 +1,7 @@
 '''
 Klamist，2024-2-29 21:39:33
 自用版，E键交互，F是秘技。
-若要换回F交互E秘技，修改__init__部分开头的字母。
-
-其他修改：
-- 去掉了shift疾跑功能。
-- 缩减了很多sleep时间。
-- 优化了wait_main_interaction。
-- 转向识别角度的arrow.jpg换为png，并在超180度旋转时反方向转。
+若要换回F交互E秘技，修改__init__部分开头的字母
 '''
 
 from win32 import win32api,win32gui
@@ -81,6 +75,26 @@ class Calculated:
         left, top, right, bottom = win32gui.GetWindowRect(hwnd)
         left, top, right, bottom = left+self.left_border,top+self.up_border,right-self.left_border,bottom-self.left_border
         return (left, top, right, bottom)
+
+    def char_exp_record(self,who_shot:int,who_walk:int):
+        # 打开角色面板，打开经验值，截图
+        self.key_press(str(who_shot),0.1)
+        time.sleep(0.4)
+        self.key_press("c",0.1)
+        time.sleep(1.5)
+        self.img_click("char_update.png",(1600,950,1750,1030),1)
+        time.sleep(0.5)
+        char_time = time.strftime("%Y-%m-%d-%H-%M-%S",time.localtime())
+        left, top, right, bottom = self.get_WindowRect(self.hwnd)
+        screenshot = self.screenshot.grab(left,top)
+        cv.imwrite(f"./logs/{char_time}.jpg",screenshot,[cv.IMWRITE_JPEG_QUALITY, 25])
+        log.info(f"已记录角色经验")
+        self.key_press(Key.esc,0.1)
+        time.sleep(0.4)
+        self.key_press(Key.esc,0.1)
+        time.sleep(0.4)
+        self.key_press(str(who_walk),0.1)
+        self.check_main_interface()
 
     def take_screenshot(self,points=(0,0,0,0)):
         """
@@ -432,12 +446,12 @@ class Calculated:
     def wait_main_interface(self):
         start_time = time.time()    # 开始计算等待时间
         while True:
-            if self.img_click("fighting_lost.jpg",(700,140,1200,400),0.25):
+            if self.img_check("liaotian.png",(20,900,80,970),0.3):
+                break
+            if self.img_click("fighting_lost.jpg",(700,140,1200,400),0.1):
                 log.info("战斗失败")
                 break
-            if self.img_check("liaotian.png",(20,900,80,970),0.25):
-                break
-            time.sleep(0.5)
+            time.sleep(0.3)
             if time.time() - start_time > self.fight_time:
                 return False
         time.sleep(1.0)   # 等待人物模型出现
@@ -445,7 +459,7 @@ class Calculated:
 
     def check_main_interface(self):
         log.info("强制在主界面")
-        if self.img_check("liaotian.png",(20,900,80,970),10):
+        if self.img_check("liaotian.png",(20,900,80,970),7):
             time.sleep(1.0)   # 等待人物模型出现
         else:
             while not self.img_check("liaotian.png",(20,900,80,970),1):
@@ -478,14 +492,14 @@ class Calculated:
             等待传送结束
         """
         log.info("执行交互")
-        time.sleep(1)   # 截图识别延时性修复
+        time.sleep(0.5)   # 截图识别延时性修复
         start_time = time.time()    # 开始计算等待时间
         while not self.img_check(self.use_pic,(1050,580,1250,660),1):
             self.Keyboard.press(mode)
             time.sleep(0.1)
             self.Keyboard.release(mode)
             # 超时中断
-            if time.time() - start_time > 30:
+            if time.time() - start_time > 20:
                 return False
         time.sleep(0.5)
         self.Keyboard.press(self.use_key)
@@ -501,18 +515,18 @@ class Calculated:
         """
         start_time = time.time()    # 开始计算等待时间
         while True:
-            if self.img_check("one.jpg",(1860,300,1900,350),0.5):
+            if self.img_check("one.jpg",(1860,300,1900,350),0.3):
                 break
             # 遥梦之眼交互
-            if self.img_check("map_4-1_point_6.png",overtime=0.5):
-                if self.img_check("map_4-1_point_7.png",overtime=2.0):
-                    self.img_click("map_4-1_point_8.png",overtime=0.5)
+            if self.img_check("map_4-1_point_6.png",(1352,646,1480,700),overtime=0.3):
+                if self.img_check("map_4-1_point_7.png",(540,840,810,1080),overtime=2.5):
+                    self.img_click("map_4-1_point_8.png",(1298,727,1352,789),overtime=0.5)
                 else:
-                    self.img_click("map_4-1_point_6.png",overtime=0.5)
+                    self.img_click("map_4-1_point_6.png",(1352,646,1480,700),overtime=0.5)
             # 界域定锚退出
-            if self.img_click("exit.jpg",overtime=0.5):
+            if self.img_click("exit.jpg",(1820,20,1900,100),overtime=0.3):
                 break
-            time.sleep(0.5)
+            time.sleep(0.3)
             if time.time() - start_time > 30:
                 return False
         time.sleep(1)   # 等待人物模型出现

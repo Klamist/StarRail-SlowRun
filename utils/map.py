@@ -10,7 +10,7 @@ class Map:
         self.calculated = base
         self.team_change = False
         self.teamid = 1
-        self.id = 1
+        self.id = 1  # 赶路用几号角色
         self.nums = 0
         self.skill = True
         self.skill_food = True
@@ -19,6 +19,8 @@ class Map:
         self.run_change = False
         self.map_list = []
         self.auto_map_list = []
+        self.exp_record = 0  # 截图记录角色经验标记
+        self.exp_record_who = 3  # 记录几号位角色
 
     def Enter_map_start(self,mapjson):
         """
@@ -45,6 +47,7 @@ class Map:
                         # 进入星球
                         if self.planetid != planet_id:
                             self.planetid = planet_id
+                            self.exp_record = 1
                             log.info("进入星球")
                             for i in range(3):
                                 if self.calculated.img_check("planet_navigation.jpg",(40,40,100,100),1):
@@ -82,6 +85,7 @@ class Map:
                     else:
                         # 进入地图
                         self.calculated.open_map()
+                        self.planetid = planet_id
                     if value != "":
                         # 进入层数
                         log.info(f"进入{value}层")
@@ -216,6 +220,9 @@ class Map:
         map_name = read_json_info(mapjson,"name",prepath=self.mappath)
         log.info(f"当前执行路线:{map_name}")
         self.Enter_map_start(mapjson)
+        if self.exp_record:
+            self.calculated.char_exp_record(self.exp_record_who,self.id)
+            self.exp_record = 0
         self.Enter_map_fighting(mapjson)
 
     def Enter_map_jsonlist(self,jsonlist):
@@ -260,6 +267,7 @@ class Map:
         if self.run_change:
             log.info("锄大地---疾跑模式切换")
             self.calculated.run_change(0)
+        self.calculated.char_exp_record(self.exp_record_who,self.id)
         log.info("锄大地---执行完毕")
         message("锄大地---执行完毕")
 
