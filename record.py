@@ -68,6 +68,7 @@ def mouse_move(value:int):
 # 按下触发事件
 def on_press(key):
     # 记录当前时间
+    # print(key)
     current_time = time.perf_counter()
     try:
         if key.char in key_list and key.char not in key_down_time:

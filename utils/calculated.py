@@ -20,7 +20,7 @@ from cnocr import CnOcr
 import os
 import ctypes
 from pynput import mouse, keyboard
-from pynput.keyboard import Key
+from pynput.keyboard import Key,KeyCode
 from .screenhoot import Screenhoot
 class Calculated:
     def __init__(self):
@@ -550,6 +550,9 @@ class Calculated:
             关闭模式
         """
         # 关闭游戏
+        self.Keyboard.press(KeyCode.from_vk(103))
+        time.sleep(0.05)
+        self.Keyboard.release(KeyCode.from_vk(103))
         if mode >= 1:
             self.Keyboard.press(Key.esc)
             time.sleep(0.05)
@@ -713,16 +716,16 @@ class Calculated:
         self.Keyboard.press('w')
         time.sleep(0.05)
         self.Keyboard.release('w')
-        time.sleep(0.5)
+        time.sleep(0.6)
         arrow = read_picture("arrow.png")
-        img = self.take_screenshot((120,135,160,175))
+        img = self.take_screenshot((120,130,160,170))
         hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)  # 转HSV
         # 设置蓝色提取范围
         lower = np.array([91, 120, 60])
         upper = np.array([98, 255, 255])
         mask = cv.inRange(hsv, lower, upper)  # 创建掩膜
         arrow_now = cv.bitwise_and(img,img, mask=mask)
-        cv.imwrite("arrow.png",arrow_now)
+        # cv.imwrite("arrow.png",arrow_now)
         best_val = 0.00
         angle = 0
         for i in range(360):

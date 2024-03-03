@@ -31,6 +31,7 @@ class Map:
         map_name_dir = mapjson[0:mapjson.index("_",5)] + ".jpg"
         map_name = read_json_info(mapjson,"name",prepath=self.mappath).split("-")[0]
         planet_id = int(mapjson[mapjson.index('_') + 1:mapjson.index('-')])
+        print(map_name_dir, map_name, planet_id)
         # map_id = str(mapjson[mapjson.index('_') + 1:mapjson.rindex('_')])
         for start in start_list:
             for key,value in start.items():
@@ -38,7 +39,7 @@ class Map:
                     # 激活窗口
                     # win32gui.SetForegroundWindow(self.calculated.hwnd)
                     # self.calculated.wait_main_interface()
-                    if not self.calculated.ocr_check(map_name,(0,0,200,40),0.7,mode=2):
+                    if not self.calculated.ocr_check(map_name,(0,0,300,40),1.0,mode=2):
                         # 进入地图
                         self.calculated.open_map()
                         # 进入星球
