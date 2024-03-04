@@ -20,7 +20,7 @@ class Map:
         self.map_list = []
         self.auto_map_list = []
         self.exp_record = 0  # 截图记录角色经验标记
-        self.exp_record_who = 3  # 记录几号位角色
+        self.exp_record_who = 1  # 记录几号位角色
 
     def Enter_map_start(self,mapjson):
         """
@@ -39,8 +39,8 @@ class Map:
             for key,value in start.items():
                 if key == "map":
                     # 激活窗口
-                    # win32gui.SetForegroundWindow(self.calculated.hwnd)
-                    # self.calculated.wait_main_interface()
+                    win32gui.SetForegroundWindow(self.calculated.hwnd)
+                    self.calculated.wait_main_interface()
                     if not self.calculated.ocr_check(map_name,(0,0,300,40),1.0,mode=2):
                         # 进入地图
                         self.calculated.open_map()

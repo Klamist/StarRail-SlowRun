@@ -357,7 +357,7 @@ class Calculated:
         time.sleep(0.2)
         log.info(f"视角转向{value}")
         win32api.mouse_event(1,int(value*self.scale),0)
-        time.sleep(0.3)
+        time.sleep(0.4)
 
     def has_red(self, points=(0,0,0,0)):
         """
@@ -730,7 +730,7 @@ class Calculated:
         self.Keyboard.press('w')
         time.sleep(0.05)
         self.Keyboard.release('w')
-        time.sleep(0.6)
+        time.sleep(0.55)
         arrow = read_picture("arrow.png")
         img = self.take_screenshot((120,130,160,170))
         hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)  # 转HSV
@@ -758,7 +758,6 @@ class Calculated:
             校准蓝色箭头位置角度
         """
         self.wait_main_interaction()
-        # 第一次勇敢转向
         angle_now = self.get_loc_angle()
         rotate_angle = angle_now - angle
         if rotate_angle > 180:
@@ -766,15 +765,6 @@ class Calculated:
         elif rotate_angle < -180:
             rotate_angle += 360
         self.mouse_move(6150*rotate_angle/360)
-        # 第二次勇敢转向
-        angle_now = self.get_loc_angle()
-        rotate_angle = angle_now - angle
-        if rotate_angle > 180:
-            rotate_angle -= 360
-        elif rotate_angle < -180:
-            rotate_angle += 360
-        self.mouse_move(6150*rotate_angle/360)
-        # 终极转向完毕
         log.info(f"转向{angle}")
 
     def map_pos(self,mappath:str):
