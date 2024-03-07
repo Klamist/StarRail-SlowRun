@@ -203,6 +203,7 @@ class Map:
                     self.calculated.key_press("r")
                     log.info(f"滑墙")
                     time.sleep(1.5)
+                    self.calculated.wait_main_interface()
                 elif key == "delay":
                     log.info(f"在这停顿:{value}")
                     time.sleep(value)
