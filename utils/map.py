@@ -245,8 +245,10 @@ class Map:
             time.sleep(2)
             self.calculated.Mouse.release(mouse.Button.left)
         self.calculated.Keyboard.press("m")
+        time.sleep(0.05)
         self.calculated.Keyboard.release("m")
-        time.sleep(1)
+        time.sleep(0.5)
+        self.calculated.turn_video_record()
 
     def start(self):
         log.info("游戏初始化设置")

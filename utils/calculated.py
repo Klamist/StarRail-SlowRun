@@ -558,15 +558,18 @@ class Calculated:
             self.Keyboard.release(key)
         return True
 
+    def turn_video_record(self):
+        self.Keyboard.press(KeyCode.from_vk(103))
+        time.sleep(0.05)
+        self.Keyboard.release(KeyCode.from_vk(103))
+
     def close_game(self,mode):
         """
         说明:
             关闭模式
         """
         # 关闭游戏
-        self.Keyboard.press(KeyCode.from_vk(103))
-        time.sleep(0.05)
-        self.Keyboard.release(KeyCode.from_vk(103))
+        self.turn_video_record()
         if mode >= 1:
             self.Keyboard.press(Key.esc)
             time.sleep(0.05)
