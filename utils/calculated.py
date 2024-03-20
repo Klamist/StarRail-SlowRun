@@ -76,7 +76,7 @@ class Calculated:
         left, top, right, bottom = left+self.left_border,top+self.up_border,right-self.left_border,bottom-self.left_border
         return (left, top, right, bottom)
 
-    def char_exp_record(self,who_shot:int,who_walk:int):
+    def char_exp_record(self,who_shot:int,who_walk:int,mater=0):
         # 打开角色面板，打开经验值，截图
         self.key_press(str(who_shot),0.1)
         time.sleep(0.4)
@@ -94,7 +94,24 @@ class Calculated:
         time.sleep(0.4)
         self.key_press(Key.esc,0.1)
         time.sleep(0.4)
+        self.check_main_interface()
         self.key_press(str(who_walk),0.1)
+        time.sleep(0.2)
+        # 记录材料面板
+        if(mater==0):
+            return
+        time.sleep(0.3)
+        self.key_press("b",0.1)
+        time.sleep(2.5)
+        if(self.img_click("material.png",(900,50,950,100),1,0.6)):
+            time.sleep(1.0)
+        char_time = time.strftime("%Y-%m-%d-%H-%M-%S",time.localtime())
+        left, top, right, bottom = self.get_WindowRect(self.hwnd)
+        screenshot = self.screenshot.grab(left,top)
+        cv.imwrite(f"./logs/{char_time}.jpg",screenshot,[cv.IMWRITE_JPEG_QUALITY, 25])
+        log.info(f"已记录背包材料")
+        self.key_press(Key.esc,0.1)
+        time.sleep(0.5)
         self.check_main_interface()
 
     def take_screenshot(self,points=(0,0,0,0)):

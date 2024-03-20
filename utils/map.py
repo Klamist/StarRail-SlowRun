@@ -21,6 +21,7 @@ class Map:
         self.auto_map_list = []
         self.exp_record = 0  # 截图记录角色经验标记
         self.exp_record_who = 1  # 记录几号位角色
+        self.material = 1  # 是否记录材料
 
     def Enter_map_start(self,mapjson):
         """
@@ -222,7 +223,7 @@ class Map:
         log.info(f"当前执行路线:{map_name}")
         self.Enter_map_start(mapjson)
         if self.exp_record:
-            self.calculated.char_exp_record(self.exp_record_who,self.id)
+            self.calculated.char_exp_record(self.exp_record_who,self.id,self.material)
             self.exp_record = 0
         self.Enter_map_fighting(mapjson)
 
@@ -248,6 +249,7 @@ class Map:
         time.sleep(0.05)
         self.calculated.Keyboard.release("m")
         time.sleep(0.5)
+        self.planetid = 0  # 当前所处星球清零
         self.calculated.turn_video_record()
 
     def start(self):
@@ -270,7 +272,7 @@ class Map:
         if self.run_change:
             log.info("锄大地---疾跑模式切换")
             self.calculated.run_change(0)
-        self.calculated.char_exp_record(self.exp_record_who,self.id)
+        self.calculated.char_exp_record(self.exp_record_who,self.id,self.material)
         log.info("锄大地---执行完毕")
         message("锄大地---执行完毕")
 
